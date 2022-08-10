@@ -1,7 +1,7 @@
 <app-header titulo="Registro"></app-header>
-
+<ion-progress-bar type="indeterminate" *ngIf="loading"></ion-progress-bar>
 <ion-content>
-  <ion-progress-bar type="indeterminate" *ngIf="loading"></ion-progress-bar>
+  
   
   <div>
     <img src="../../../assets/cam.png" alt="">
@@ -11,7 +11,11 @@
     <ion-item>
       <ion-label position="floating">MATRICULA</ion-label>
       <ion-input type="number" name="Matricula" [(ngModel)]="request.Matricula"></ion-input>
+      <small>{{request.Matricula.toString().length}}  / 8</small>
     </ion-item>
+   
+    
+    
     <ion-item>
       <ion-label position="floating">NOMBRE</ion-label>
       <ion-input type="text" name="Nombre" [(ngModel)]="request.Nombre" ></ion-input>
@@ -43,9 +47,14 @@
     <ion-item>
       <ion-label position="floating">CONTRASEÑA</ion-label>
       <ion-input type="password" name="Password" placeholder="" [(ngModel)]="request.Password" ></ion-input>
+      <small>{{request.Password.toString().length}}</small>
     </ion-item>
   </form>
-
-  <button class="btn btn-conf" (click)="registro()">Registrar</button>
+ 
+  <!--<ion-button class="btn btn-conf" (click)="registro()" [disabled]="validaCampos">Registrar</ion-button>-->
+  <button class="btn btn-conf" (click)="registro()" [disabled]="validaCampos || loading">Registrar</button>
 
 </ion-content>
+<ion-footer>
+  
+</ion-footer>

@@ -48,7 +48,43 @@ export class RegistroPage implements OnInit {
     toast.present();
   }
 
-  registro(){
+  get validaCampos(){
+
+    if(this.request.Nombre == "" || this.request.APaterno == "" || this.request.AMaterno == "")
+      return true;
+
+    return false;
+  }
+  regexEmail = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+  registro(){    
+   
+    
+    if(!this.request.Matricula || this.request.Matricula == ""){
+      this.presentToast("Matricula es un campo obligatorio");
+      return;
+    }
+
+    let lenghtMatricula = this.request.Matricula.toString().length;
+    if(lenghtMatricula > 8 ||  lenghtMatricula < 8){
+      this.presentToast("Matricula debe ser de 8 caracteres");
+      return;
+    }
+
+    if(this.request.Nombre == "" || this.request.APaterno == ""){
+      this.presentToast("Nombre y apellidos son campos obligatorios");
+      return;
+    }
+    if(this.request.Correo == ""){
+      this.presentToast("Correo electronico es obligatorio");
+      return;
+    }
+    if(!RegExp(this.regexEmail).test(this.request.Correo)){
+      this.presentToast("Formato de correo invalido");
+      return;
+    }
+
+  
+
     this.loading = true;
       this.reg.regUser(this.request).subscribe({
         next:(userReg)=> {

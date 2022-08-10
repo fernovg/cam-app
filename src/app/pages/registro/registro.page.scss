@@ -38,4 +38,7 @@ ion-item{
 .btn-conf{
     color: #fff;
     background-color: #4178BF;
+    &:disabled{
+        background-color: grey;
+    }
 }
