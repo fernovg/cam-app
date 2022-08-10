@@ -9,6 +9,7 @@ import { SolicitudesPageRoutingModule } from './solicitudes-routing.module';
 import { SolicitudesPage } from './solicitudes.page';
 import { ComponentsModule } from 'src/app/components/components.module';
 import { CardComponent } from './card/card.component';
+import { ModalComponent } from './card/modal/modal.component';
 
 @NgModule({
   imports: [
@@ -19,6 +20,7 @@ import { CardComponent } from './card/card.component';
     ComponentsModule
   ],
   declarations: [SolicitudesPage,
-  CardComponent]
+  CardComponent,
+  ModalComponent]
 })
 export class SolicitudesPageModule {}

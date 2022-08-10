@@ -1,5 +1,4 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { SelectMultipleControlValueAccessor } from '@angular/forms';
 import { ModalController, ToastController } from '@ionic/angular';
 import { respuestaDis} from "../../../../models/users.models";
 

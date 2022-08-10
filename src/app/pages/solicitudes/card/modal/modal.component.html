@@ -24,7 +24,7 @@
   <ion-list>
     <ion-item>
         <ion-icon name="time"></ion-icon>
-        <ion-select placeholder="Seleciona la Hora" [(ngModel)]="request.Hora">
+        <ion-select mode="ios" placeholder="Seleciona la Hora" [(ngModel)]="request.Hora">
             <ion-select-option value="{{hora.HoraC}}" name="Hora"  *ngFor="let hora of respuestaDis?.hora" mode="ios">{{hora.Horas}}</ion-select-option>
         </ion-select>
     </ion-item>
