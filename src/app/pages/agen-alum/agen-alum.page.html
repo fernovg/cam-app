@@ -1,0 +1,48 @@
+<app-header titulo="Solicitar Cita"></app-header>
+
+<ion-content>
+    <ion-progress-bar type="indeterminate" *ngIf="loading"></ion-progress-bar>
+    
+    <ion-card mode="ios">       
+
+        <img src="../../../assets/cam.png" alt="">
+
+        <ion-card-title>Solicitar Cita</ion-card-title>
+
+        <div class="form">
+            <ion-list>
+                <ion-item>
+                    <ion-icon name="accessibility"></ion-icon>
+                    <ion-select placeholder="Seleciona Docente" [(ngModel)]="request.Docente">
+                        <ion-select-option value="{{listDocen.Matricula}}" name="Docente"  *ngFor="let listDocen of respuestaDocentes?.listDocen" mode="ios">Docente: {{listDocen.Nombre}}</ion-select-option>
+                    </ion-select>
+                </ion-item>
+            </ion-list>
+    
+            <ion-datetime mode="ios" [isDateEnabled]="isWeekday" presentation="date" name="Fecha" displayFormat="MM/DD/YYYY"
+            min="{{fechavalida}}" [(ngModel)]="request.Fecha"></ion-datetime>
+
+            <ion-list>
+                <ion-item>
+                    <ion-icon name="dice"></ion-icon>
+                    <ion-select placeholder="Seleciona el Area" [(ngModel)]="request.Area">
+                        <ion-select-option value="{{areas.ID}}" name="Area"  *ngFor="let areas of respuestaAreas?.areas" mode="ios">{{areas.Area}}</ion-select-option>
+                    </ion-select>
+                </ion-item>
+            </ion-list>
+    
+            <ion-list>
+                <ion-item>
+                    <ion-icon name="time"></ion-icon>
+                    <ion-select placeholder="Seleciona la Hora" [(ngModel)]="request.Hora">
+                        <ion-select-option value="{{hora.HoraC}}" name="Hora"  *ngFor="let hora of respuestaDis?.hora" mode="ios">{{hora.Horas}}</ion-select-option>
+                    </ion-select>
+                </ion-item>
+            </ion-list>
+
+            <ion-button color="success" expand="block" (click)="solicitad()" [disabled]="loading">Solicitar</ion-button>
+        </div>
+    
+    </ion-card>
+
+</ion-content>

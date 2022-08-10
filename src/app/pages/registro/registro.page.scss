@@ -1,0 +1,41 @@
+img{
+    display: flex; 
+    width: 100px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 50px;
+    margin-top: 35px;
+}
+
+.form{
+    display: flex;    
+    flex-direction: column;
+    flex-wrap: nowrap;
+    margin: 15px;   
+    margin-bottom: 30px; 
+}
+
+ion-item{
+    width: 100%;
+    background: #E5E2E2;
+    margin-bottom: 15px;
+    font-size: 16px;
+    color: black;    
+}
+
+.btn{
+    border-radius: 15px;
+    border: 2px;
+    font-size: 20px;
+    padding: 6px 25px;
+    cursor: pointer;
+    display: block; 
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 30px;
+}
+
+.btn-conf{
+    color: #fff;
+    background-color: #4178BF;
+}

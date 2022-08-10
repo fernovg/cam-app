@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">CAM</string>
+    <string name="title_activity_main">CAM</string>
+    <string name="package_name">com.android.cam.app</string>
+    <string name="custom_url_scheme">com.android.cam.app</string>
+</resources>

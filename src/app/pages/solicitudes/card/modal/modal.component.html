@@ -1,0 +1,33 @@
+
+<ion-header mode="ios">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button color="medium" (click)="cancel()">Cancelar</ion-button>
+    </ion-buttons>
+    <ion-title>Reagendar Cita</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="confirm()">Confirmar</ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <center>
+  <h3>Cita: {{Num_Cita}}</h3>
+  </center>
+
+  <ion-item>
+    <ion-datetime mode="ios" [isDateEnabled]="isWeekday" presentation="date" name="Fecha"
+    min="{{fechavalida}}" [(ngModel)]="request.Fecha"></ion-datetime>
+  </ion-item>
+
+  <ion-list>
+    <ion-item>
+        <ion-icon name="time"></ion-icon>
+        <ion-select placeholder="Seleciona la Hora" [(ngModel)]="request.Hora">
+            <ion-select-option value="{{hora.HoraC}}" name="Hora"  *ngFor="let hora of respuestaDis?.hora" mode="ios">{{hora.Horas}}</ion-select-option>
+        </ion-select>
+    </ion-item>
+  </ion-list>
+
+</ion-content>

@@ -1,0 +1,51 @@
+<app-header titulo="Registro"></app-header>
+
+<ion-content>
+  <ion-progress-bar type="indeterminate" *ngIf="loading"></ion-progress-bar>
+  
+  <div>
+    <img src="../../../assets/cam.png" alt="">
+  </div>
+
+  <form class="form" action="" method="post">
+    <ion-item>
+      <ion-label position="floating">MATRICULA</ion-label>
+      <ion-input type="number" name="Matricula" [(ngModel)]="request.Matricula"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">NOMBRE</ion-label>
+      <ion-input type="text" name="Nombre" [(ngModel)]="request.Nombre" ></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">APELLIDO PATERNO</ion-label>
+      <ion-input type="text" name="APaterno" [(ngModel)]="request.APaterno" ></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">APELLIDO MATERNO</ion-label>
+      <ion-input type="text" name="AMaterno" [(ngModel)]="request.AMaterno" ></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">TELEFONO</ion-label>
+      <ion-input type="number" name="Telefono" placeholder="" [(ngModel)]="request.Telefono" ></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">CORREO</ion-label>
+      <ion-input type="email" name="Correo" placeholder="" [(ngModel)]="request.Correo" required></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">NOMBRE DEL TUTOR</ion-label>
+      <ion-input type="text" name="Tutor" placeholder="" [(ngModel)]="request.Tutor" ></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">USUARIO</ion-label>
+      <ion-input type="text" name="Usuario" placeholder="" [(ngModel)]="request.Usuario" ></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">CONTRASEÑA</ion-label>
+      <ion-input type="password" name="Password" placeholder="" [(ngModel)]="request.Password" ></ion-input>
+    </ion-item>
+  </form>
+
+  <button class="btn btn-conf" (click)="registro()">Registrar</button>
+
+</ion-content>

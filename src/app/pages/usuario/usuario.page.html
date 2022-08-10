@@ -1,0 +1,114 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title class="ion-text-capitalize">
+      {{usuario}} {{nombre}}
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <ion-progress-bar type="indeterminate" *ngIf="loading"></ion-progress-bar>
+
+  <div class="header">
+    <img src="../../../assets/cam.png" alt="">
+
+
+  </div>
+
+  <ion-segment (ionChange)="segmentChanged($event)" value="aprobadas">
+    <ion-segment-button value="aprobadas">
+      <ion-label>Aprobadas</ion-label>
+    </ion-segment-button>
+    <ion-segment-button value="pendientes">
+      <ion-label>Pendientes</ion-label>
+    </ion-segment-button>
+    <ion-segment-button value="canceladas">
+      <ion-label>Canceladas</ion-label>
+    </ion-segment-button>
+  </ion-segment>
+
+  <div class="box-citas">
+    <h2>Citas</h2>
+    <div class="listcitas" *ngIf="!loading">
+      <app-card [cita]="citas" [tipoUsuario]="'docente'"  [tipo]="tabSeleccionado" *ngFor="let citas of respuestaCitasD?.citas">
+
+      </app-card>
+
+    </div>
+    <div class="listcitas" *ngIf="!loading">
+      <app-card [cita]="citas" [tipoUsuario]="'alumno'" [tipo]="tabSeleccionado" *ngFor="let citas of respuestaCitas?.citas">
+
+      </app-card>
+
+    </div>
+    <div class="ion-padding"
+      *ngIf="!loading && (respuestaCitas?.citas.length == 0 || respuestaCitasD?.citas.length == 0)">
+      <h3>No se encontraron citas</h3>
+    </div>
+
+    <div *ngIf="loading">
+      <ion-card mode="ios" *ngIf="!procesado">
+        <ion-item>
+          <ion-icon name="add-circle" slot="start"></ion-icon>
+          <ion-label>
+            <ion-skeleton-text animated></ion-skeleton-text>
+          </ion-label>
+        </ion-item>
+        <ion-card-content>
+          <ion-label>
+            <ion-skeleton-text animated></ion-skeleton-text>
+          </ion-label>
+          <br>
+          <ion-label>
+            <ion-skeleton-text animated></ion-skeleton-text>
+          </ion-label>
+          <br>
+          <ion-label>
+            <ion-skeleton-text animated></ion-skeleton-text>
+          </ion-label>
+          <br>
+          <ion-label>
+            <ion-skeleton-text animated></ion-skeleton-text>
+          </ion-label>
+          <br>
+          <ion-label>
+            <ion-skeleton-text animated></ion-skeleton-text>
+          </ion-label>
+          <br>
+          <ion-label>
+            <ion-skeleton-text animated></ion-skeleton-text>
+          </ion-label>
+          <br>
+          <ion-label>
+            <ion-skeleton-text animated></ion-skeleton-text>
+          </ion-label>
+        </ion-card-content>
+        <ion-card-content class="btns" *ngIf="tipo == 'pendientes'">
+          <ion-skeleton-text animated></ion-skeleton-text>
+        </ion-card-content>
+      </ion-card>
+    </div>
+  </div>
+
+
+</ion-content>
+<ion-footer>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button color="danger" (click)="cerrar()">
+        <ion-icon name="log-out"></ion-icon> Cerrar Sesion
+      </ion-button>
+    </ion-buttons>
+  
+    <ion-buttons slot="primary">
+      <ion-button color="success" routerLink="/agen-docen" *ngIf="this.auth.currentUserValue.tipoId == '2'">
+        <ion-icon name="add-circle"></ion-icon> Agendar Cita
+      </ion-button>
+      <ion-button color="success" routerLink="/agen-alum" *ngIf="this.auth.currentUserValue.tipoId == '3'">
+        <ion-icon name="add-circle"></ion-icon> Agendar Cita
+      </ion-button>
+      
+    </ion-buttons>
+  </ion-toolbar>
+</ion-footer>

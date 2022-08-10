@@ -1,0 +1,31 @@
+<app-header titulo="Solicitudes de Citas"></app-header>
+
+<ion-content>
+  <ion-progress-bar type="indeterminate" *ngIf="loading"></ion-progress-bar>
+  <app-card [cita]="citas" *ngFor="let citas of respuestaCitasD?.citas">
+    
+  </app-card>
+  
+
+  <!--parte del alumno-->
+
+  <ion-card mode="ios" *ngFor="let citas of respuestaCitas?.citas">
+    <ion-item>
+      <ion-icon name="time" slot="start"></ion-icon>
+      <ion-label>Docente: {{citas.Nombre}}</ion-label>      
+    </ion-item>
+  
+    <ion-card-content>
+      <ion-label>Area: {{citas.Nombre_Area}}</ion-label>
+      <br>
+      <ion-label>Fecha: {{citas.Fecha_Cita}}</ion-label>
+      <br>
+      <ion-label>Hora: {{citas.Hora}}</ion-label>
+      <br>
+      <ion-label>Estado: {{citas.Estado_Cita}}</ion-label>
+    </ion-card-content>
+  </ion-card>
+
+
+
+</ion-content>

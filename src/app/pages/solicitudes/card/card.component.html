@@ -1,0 +1,34 @@
+<ion-progress-bar type="indeterminate" *ngIf="loading"></ion-progress-bar>
+<ion-card mode="ios" *ngIf="!procesado">
+  <ion-item>
+    <ion-icon name="reader" slot="start"></ion-icon>
+    <ion-label>{{tipoUsuario == 'docente' ? 'Alumno' : 'Docente'}}: {{cita.Nombre}}</ion-label>            
+  </ion-item>
+
+  <ion-card-content>
+    <ion-label>Num Cita: {{cita.Num_Cita}}</ion-label>
+    <br>
+    <div *ngIf="tipoUsuario == 'docente'">
+      <ion-label >Tutor: {{cita.Tutor}}</ion-label>
+      <br>
+    </div>    
+    <ion-label>Telefono: {{cita.Telefono}} </ion-label>
+    <br>
+    <ion-label>Area:{{cita.Nombre_Area}}</ion-label>
+    <br>
+    <ion-label>Aula: {{cita.Aula}}</ion-label>
+    <br>
+    <ion-label>Fecha: {{cita.Fecha_Cita}}</ion-label>
+    <br>
+    <ion-label>Hora: {{cita.Hora}}</ion-label>
+  </ion-card-content>
+  <ion-card-content class="btns" *ngIf="tipo == 'pendientes' && tipoUsuario == 'docente'">
+    <ion-button fill="outline" color="success" slot="end" (click)="aprobar(cita.Num_Cita)" [disabled]="loading">Aceptar</ion-button>
+    <ion-button fill="outline" color="danger" slot="end" (click)="rechazar(cita.Num_Cita)" [disabled]="loading">Cancelar</ion-button>
+  </ion-card-content>
+
+  
+  <ion-card-content class="btns" *ngIf="tipo == 'canceladas' && tipoUsuario == 'alumno'">
+    <ion-button fill="outline" color="warning" (click)="openModal(cita.Num_Cita)" slot="end" [disabled]="loading">Reagendar</ion-button>
+  </ion-card-content>
+</ion-card>

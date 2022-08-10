@@ -1,0 +1,30 @@
+<!---->
+<app-header titulo="Inicio de Sesion"></app-header>
+
+<ion-content>
+
+  <ion-progress-bar type="indeterminate" *ngIf="loading"></ion-progress-bar>
+
+  <div>
+    <img src="../../../assets/cam.png" alt="">
+  </div>  
+
+  <form class="form" action="" method="post">
+    <ion-item>
+      <ion-label position="floating">Usuario</ion-label>
+      <ion-input name="user" id="user" [(ngModel)]="request.Usuario"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">Contraseña</ion-label>
+      <ion-input type="password" name="pass" id="pass" [(ngModel)]="request.Password"></ion-input>
+    </ion-item>
+
+  </form>
+  
+  <div class="botones">    
+    <button class="btn btn-conf" (click)="logeo()" [disabled]="loading">Iniciar Sesion</button>
+  </div>
+  <center>
+      <a class="olvi" routerLink="../registro">No tengo cuenta</a>
+  </center>
+</ion-content>
