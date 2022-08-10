@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { NavController, ToastController } from '@ionic/angular';
 import { RegistroService } from '../registro.service';
 
@@ -18,8 +18,14 @@ export class RegistroPage implements OnInit {
     Correo: "",
     Tutor: "",
     Usuario: "",
-    Password: ""
+    Password: "",
+    Foto: ""
   }
+
+  @ViewChild('filepicker') uploader: ElementRef;
+
+  base: string = "";
+
 
   constructor(private reg:RegistroService,private navcontroller:NavController, public toastController: ToastController) { }
 
@@ -27,6 +33,21 @@ export class RegistroPage implements OnInit {
   }
 
   loading:boolean = false;
+
+  addFile() {
+    this.uploader.nativeElement.click();
+  }
+
+  async fileSelected($event) {
+    const selected = $event.target.files[0];
+    var reader = new FileReader();
+      //this.fileToUpload = files[0];
+      reader.readAsDataURL(selected);
+      reader.onload = (_event) => {
+        console.log(reader.result.toString());
+        this.base = reader.result.toString();
+      }
+  }
 
   async llenoToast(message) {
     const toast = await this.toastController.create({
@@ -57,7 +78,7 @@ export class RegistroPage implements OnInit {
   }
   regexEmail = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
   registro(){    
-   
+
     
     if(!this.request.Matricula || this.request.Matricula == ""){
       this.presentToast("Matricula es un campo obligatorio");
@@ -81,9 +102,9 @@ export class RegistroPage implements OnInit {
     if(!RegExp(this.regexEmail).test(this.request.Correo)){
       this.presentToast("Formato de correo invalido");
       return;
-    }
+    }  
 
-  
+    this.request.Foto = this.base;
 
     this.loading = true;
       this.reg.regUser(this.request).subscribe({
@@ -93,6 +114,8 @@ export class RegistroPage implements OnInit {
             this.presentToast(userReg.message);
             return
           }
+          console.log(this.request);
+          
           this.llenoToast(userReg.message);
           this.request = {
             Matricula: "",
@@ -103,7 +126,8 @@ export class RegistroPage implements OnInit {
             Correo: "",
             Tutor: "",
             Usuario: "",
-            Password: ""
+            Password: "",
+            Foto: ""
           }   
           this.navcontroller.navigateRoot("/login")
         },error: error=> {

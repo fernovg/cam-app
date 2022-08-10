@@ -49,8 +49,23 @@
       <ion-input type="password" name="Password" placeholder="" [(ngModel)]="request.Password" ></ion-input>
       <small>{{request.Password.toString().length}}</small>
     </ion-item>
+
+    <ion-item lines="none">
+      <ion-button color="light" size="default" style="margin: auto;" (click)="addFile()">
+        <ion-icon name="cloud-upload-outline"></ion-icon>
+          Seleccionar archivo          
+      </ion-button>
+      <input hidden type="file" #filepicker (change)="fileSelected($event)" accept="image/*"/>
+    </ion-item>
+
+    <ion-item>
+      <ion-thumbnail>
+        <ion-img [src]="base"></ion-img>      
+      </ion-thumbnail>
+    </ion-item>
+    
   </form>
- 
+
   <!--<ion-button class="btn btn-conf" (click)="registro()" [disabled]="validaCampos">Registrar</ion-button>-->
   <button class="btn btn-conf" (click)="registro()" [disabled]="validaCampos || loading">Registrar</button>
 

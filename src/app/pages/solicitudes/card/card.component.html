@@ -4,8 +4,12 @@
     <ion-icon name="reader" slot="start"></ion-icon>
     <ion-label>{{tipoUsuario == 'docente' ? 'Alumno' : 'Docente'}}: {{cita.Nombre}}</ion-label>            
   </ion-item>
+  
 
   <ion-card-content>
+    <ion-item *ngIf="tipo == 'aprobadas'">
+      <img class="perfil" src="{{cita.Foto}}" />
+    </ion-item>
     <ion-label>Num Cita: {{cita.Num_Cita}}</ion-label>
     <br>
     <div *ngIf="tipoUsuario == 'docente'">

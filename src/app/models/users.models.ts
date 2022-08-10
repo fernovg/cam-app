@@ -20,6 +20,7 @@ export interface respuestaCitas{
 
 export interface userCita{
     Num_Cita?: string;
+    Foto?: string;
     Nombre?: string;
     Telefono?: string;
     Tutor?: string;
@@ -36,6 +37,7 @@ export interface respuestaCitasD{
 
 export interface userCitaD{
     Num_Cita?: string;
+    Foto?: string;
     Nombre?: string;
     Telefono?: string;
     Tutor?: string;
@@ -45,7 +47,6 @@ export interface userCitaD{
     Hora?: string;
     Estado_Cita?: string;
 }
-
 
 
 //array para campos de agendar citas

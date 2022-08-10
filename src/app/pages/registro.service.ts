@@ -23,7 +23,8 @@ export class RegistroService {
             .set('Correo', data.Correo) 
             .set('Tutor',data.Tutor)
             .set('Usuario',data.Usuario)
-            .set('Password', data.Password)    
+            .set('Password', data.Password)   
+            .set('Foto', data.Foto)   
       return this.http.post<any>(`${Environments.API_ENDPOINT}/registro.php`, body).pipe(
             map((userReg:userReg) => {
                 console.log(userReg);
