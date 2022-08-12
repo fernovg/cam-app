@@ -10,15 +10,13 @@
   <form class="form" action="" method="post">
     <ion-item>
       <ion-label position="floating">MATRICULA</ion-label>
-      <ion-input type="number" name="Matricula" [(ngModel)]="request.Matricula"></ion-input>
+      <ion-input type="number" name="Matricula" [(ngModel)]="request.Matricula" required maxlength="8" pattern="[0-9]{8}"></ion-input>
       <small>{{request.Matricula.toString().length}}  / 8</small>
-    </ion-item>
-   
-    
+    </ion-item>   
     
     <ion-item>
       <ion-label position="floating">NOMBRE</ion-label>
-      <ion-input type="text" name="Nombre" [(ngModel)]="request.Nombre" ></ion-input>
+      <ion-input type="text" name="Nombre" [(ngModel)]="request.Nombre" maxlength="5" ></ion-input>
     </ion-item>
     <ion-item>
       <ion-label position="floating">APELLIDO PATERNO</ion-label>
@@ -30,7 +28,8 @@
     </ion-item>
     <ion-item>
       <ion-label position="floating">TELEFONO</ion-label>
-      <ion-input type="number" name="Telefono" placeholder="" [(ngModel)]="request.Telefono" ></ion-input>
+      <ion-input type="number" name="Telefono" placeholder="" [(ngModel)]="request.Telefono" required maxlength="10" pattern="[0-9]{10}"></ion-input>
+      <small>{{request.Telefono.toString().length}}  / 10</small>
     </ion-item>
     <ion-item>
       <ion-label position="floating">CORREO</ion-label>
@@ -46,7 +45,7 @@
     </ion-item>
     <ion-item>
       <ion-label position="floating">CONTRASEÑA</ion-label>
-      <ion-input type="password" name="Password" placeholder="" [(ngModel)]="request.Password" ></ion-input>
+      <ion-input type="password" name="Password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{5,}" [(ngModel)]="request.Password" ></ion-input>
       <small>{{request.Password.toString().length}}</small>
     </ion-item>
 
@@ -63,6 +62,8 @@
         <ion-img [src]="base"></ion-img>      
       </ion-thumbnail>
     </ion-item>
+
+
     
   </form>
 
