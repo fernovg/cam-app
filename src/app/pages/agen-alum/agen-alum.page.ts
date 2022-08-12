@@ -2,8 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { LoadingController, NavController, ToastController } from '@ionic/angular';
 import { AuthenticationService } from 'src/app/services/autenticacion.service';
 import { AgenAlumService } from '../agen-alum.service';
-import { respuestaAreas, respuestaDocentes, respuestaDis} from "../../models/users.models";
-
+import { respuestaAreas, respuestaDocentes, respuestaDis,respuestaDocA, respuestaHora} from "../../models/users.models";
 
 
 @Component({
@@ -14,13 +13,25 @@ import { respuestaAreas, respuestaDocentes, respuestaDis} from "../../models/use
 })
 export class AgenAlumPage implements OnInit {
 
+  respuestaDocA:respuestaDocA;
+
   respuestaAreas: respuestaAreas;
 
   respuestaDocentes: respuestaDocentes;
 
   respuestaDis:respuestaDis;
 
+  respuestaHora:respuestaHora;
+
   fechavalida= new Date().toISOString();
+
+  Areas = {
+    Area: ""
+  }
+
+  encar = {
+    Matricula: ""
+  }
 
   request = {
     Matricula: this.auth.currentUserValue.intMatricula,
@@ -38,10 +49,11 @@ export class AgenAlumPage implements OnInit {
       this.cargarAreas();
       this.cargarDocentes();
       this.cargarHoras();
+      this.verEncar();
+      this.verHorario();
     }
 
-  ngOnInit() {
-    
+  ngOnInit() {     
         
   }
 
@@ -104,6 +116,25 @@ export class AgenAlumPage implements OnInit {
 
   loading:boolean = false;
 
+  verEncar(){
+    this.loading = true;
+    this.listas.verDetalles(this.Areas).subscribe(data=>
+    {
+      this.loading = false;
+      this.respuestaDocA = data;
+    })
+  }
+
+  verHorario(){
+    this.loading = true;
+    this.listas.verHorario(this.encar).subscribe(data=>
+    {
+      this.loading = false;
+      this.respuestaHora = data;
+    })
+  }
+
+
   solicitad(){
     this.loading = true;
     if (this.request.Matricula == "") {      
@@ -130,6 +161,8 @@ export class AgenAlumPage implements OnInit {
           this.presentToast(citasSoliA.message);
           return;
         }
+        console.log(this.request.Hora.split(':'));
+        console.log(this.request);
         this.request = {
           Matricula: "",
           Docente: "",
@@ -137,10 +170,28 @@ export class AgenAlumPage implements OnInit {
           Area: "",
           Hora: ""
         }         
+        this.navcontroller.navigateRoot("/usuario")
+        
         this.llenoToast(citasSoliA.message);
       }
     })
   }
+  }
+
+  get validaArea(){
+
+    if(this.Areas.Area == "")
+      return true;
+
+    return false;
+  }
+
+  get validaDocen(){
+
+    if(this.encar.Matricula == "")
+      return true;
+
+    return false;
   }
 
 }

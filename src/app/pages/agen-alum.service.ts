@@ -4,7 +4,7 @@ import { Injectable } from '@angular/core';
 import { AuthenticationService } from '../services/autenticacion.service';
 import { ManagerService } from '../services/manager.service';
 
-import { respuestaAreas, respuestaDocentes,respuestaDis, citasSoliA} from "../models/users.models";
+import { respuestaAreas, respuestaDocentes,respuestaDis, citasSoliA,respuestaDocA,respuestaHora} from "../models/users.models";
 import { Environments } from 'src/environments/env.constant';
 import { map } from 'rxjs/operators';
 
@@ -30,6 +30,28 @@ export class AgenAlumService {
     return this.http.get<respuestaDis>(`${Environments.API_ENDPOINT}/hora.php`);
   }
 
+  verDetalles(data:any){
+    const body = new HttpParams()
+    .set('Area',data.Area)
+    return this.http.post<any>(`${Environments.API_ENDPOINT}/encar.php`,body).pipe(
+      map((respuestaDocA:respuestaDocA)=>{
+        console.log(respuestaDocA);        
+        return respuestaDocA;
+      })
+    )
+  }
+
+  verHorario(data:any){
+    const body = new HttpParams()
+    .set('Matricula',data.Matricula)
+    return this.http.post<any>(`${Environments.API_ENDPOINT}/horario.php`,body).pipe(
+      map((respuestaHora:respuestaHora)=>{
+        console.log(respuestaHora);        
+        return respuestaHora;
+      })
+    )
+  }
+
   soliCita(data:any){
     const body = new HttpParams()
             .set('Matricula',data.Matricula)
@@ -44,5 +66,6 @@ export class AgenAlumService {
             })
       )
   }
+
 
 }

@@ -51,6 +51,24 @@ export interface userCitaD{
 
 //array para campos de agendar citas
 
+export interface respuestaDocA{
+    encar: encar_Area[];
+}
+
+export interface encar_Area{
+    Matricula?: string;
+    Docente?: string;
+}
+
+export interface respuestaHora{
+    hora: horario[];
+}
+
+export interface horario{
+    Duracion?: string;
+    HoraAten?: string;
+}
+
 export interface respuestaAreas{
     areas: listArea[];
 }

@@ -90,6 +90,7 @@ export class RegistroPage implements OnInit {
 
     return false;
   }
+  
   regexEmail = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
   registro(){    
 
