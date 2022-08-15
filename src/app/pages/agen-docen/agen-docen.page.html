@@ -10,23 +10,27 @@
     <ion-card-title>Solicitar Cita</ion-card-title>
 
     <div class="form">
+        <div class="buscador">
+            <ion-searchbar [(ngModel)]="buscador.Nombre" placeholder="Buscar"></ion-searchbar>
+            <ion-button color="success" size="small" (click)="buscar()" [disabled]="loading">Buscar</ion-button>
+        </div>
         <ion-list>
             <ion-item>
                 <ion-icon name="accessibility"></ion-icon>
-                <ion-select placeholder="Seleciona un alumno" [(ngModel)]="request.Matricula">
+                <ion-select placeholder="Seleciona un alumno" [(ngModel)]="request.Matricula" [disabled]="loading">
                     <ion-select-option value="{{listAlumnos.Matricula}}" name="Matricula"  *ngFor="let listAlumnos of respuestaAlumno?.listAlumnos" mode="ios">Alumno: {{listAlumnos.Nombre}}</ion-select-option>
                 </ion-select>
             </ion-item>
         </ion-list>
 
-        <ion-datetime mode="ios" [isDateEnabled]="isWeekday" presentation="date" name="Fecha" [(ngModel)]="request.Fecha"
+        <ion-datetime mode="ios" [isDateEnabled]="isWeekday" presentation="date" name="Fecha" [(ngModel)]="request.Fecha" [disabled]="loading"
         min="{{fechavalida}}"></ion-datetime>
 
         <ion-list>
             <ion-item>
                 <ion-icon name="dice"></ion-icon>
-                <ion-select placeholder="Seleciona el Area" [(ngModel)]="request.Area" >
-                    <ion-select-option value="{{areas.ID}}" name="Area"  *ngFor="let areas of respuestaAreas?.areas" mode="ios">{{areas.Area}}</ion-select-option>
+                <ion-select placeholder="Seleciona el Area" [(ngModel)]="request.Area" [disabled]="loading">
+                    <ion-select-option value="{{area.idArea}}" name="Area"  *ngFor="let area of resDocA?.area" mode="ios">{{area.Area}}</ion-select-option>
                 </ion-select>
             </ion-item>
         </ion-list>
@@ -34,8 +38,8 @@
         <ion-list>
             <ion-item>
                 <ion-icon name="time"></ion-icon>
-                <ion-select placeholder="Seleciona la Hora" [(ngModel)]="request.Hora">
-                    <ion-select-option value="{{hora.HoraC}}" name="Hora"  *ngFor="let hora of respuestaDis?.hora" mode="ios">{{hora.Horas}}</ion-select-option>
+                <ion-select placeholder="Seleciona la Hora" [(ngModel)]="request.Hora" [disabled]="loading">
+                    <ion-select-option value="{{hora.HoraAten}}" name="Hora"  *ngFor="let hora of respuestaHora?.hora" mode="ios">{{hora.Duracion}}</ion-select-option>
                 </ion-select>
             </ion-item>
         </ion-list>

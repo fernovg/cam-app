@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NavController, ToastController } from '@ionic/angular';
-import { respuestaAreas, respuestaAlumno, respuestaDis } from 'src/app/models/users.models';
+import { resDocA, respuestaAlumno, respuestaDis,respuestaHora } from 'src/app/models/users.models';
 import { AuthenticationService } from 'src/app/services/autenticacion.service';
 import { AgenDocenService } from '../agen-docen.service';
 
@@ -11,13 +11,19 @@ import { AgenDocenService } from '../agen-docen.service';
 })
 export class AgenDocenPage implements OnInit {
 
-  respuestaAreas: respuestaAreas;
-
   respuestaAlumno: respuestaAlumno;
 
   respuestaDis:respuestaDis;
 
+  respuestaHora:respuestaHora;
+
+  resDocA:resDocA;
+
   fechavalida= new Date().toISOString();
+
+  horario = {
+    Matricula: this.auth.currentUserValue.intMatricula
+  }
 
   request = {
     Matricula: "",
@@ -27,38 +33,36 @@ export class AgenDocenPage implements OnInit {
     Hora: ""
   }
 
+  buscador = {
+    Nombre: ""
+  }
+
   constructor(private auth:AuthenticationService, 
     private navcontroller:NavController,
     private listas:AgenDocenService,private user:AuthenticationService,
     public toastController: ToastController,
     private citas: AgenDocenService) { 
-      this.cargarAreas();
       this.cargarAlumnos();
-      this.cargarHoras();
+      this.verArea();
+      this.verHorario();
     }
 
   ngOnInit() {    
   }
 
-  cargarAreas(){
-    this.listas.verAreas().subscribe(data=>
-      {
-        this.respuestaAreas=data;        
-      })
-  }
-
   cargarAlumnos(){
     this.listas.verAlum().subscribe(data=>
-      {
+      {        
         this.respuestaAlumno=data;       
       })
   }  
 
-  cargarHoras(){
-    this.listas.verHora().subscribe(data=>
-      {
-        this.respuestaDis=data;
-      })
+  buscar(){
+    this.loading = true;
+    this.listas.buscador(this.buscador).subscribe(data=>{
+      this.loading = false;
+      this.respuestaAlumno=data;
+    })    
   }
 
   async vacioToast() {
@@ -100,6 +104,24 @@ export class AgenDocenPage implements OnInit {
 
   loading:boolean = false;
 
+  verArea(){
+    this.loading = true;
+    this.listas.verAreas(this.horario).subscribe(data=>
+    {
+      this.loading = false;
+      this.resDocA = data;
+    })
+  }
+
+  verHorario(){
+    this.loading = true;
+    this.listas.verHorario(this.horario).subscribe(data=>
+    {
+      this.loading = false;
+      this.respuestaHora = data;
+    })
+  }
+
   registrar(){
     this.loading = true;
     if (this.request.Matricula == "") {      
@@ -133,6 +155,7 @@ export class AgenDocenPage implements OnInit {
             Area: "",
             Hora: ""
           }     
+          this.navcontroller.navigateRoot("/usuario")
           this.llenoToast(citasRegD.message);
         },error: error=>{
           console.log(error);        
@@ -141,4 +164,11 @@ export class AgenDocenPage implements OnInit {
     }
   }
 
+  get validaArea(){
+
+    if(this.request.Nombre == "")
+      return false;
+
+    return true;
+  }
 }

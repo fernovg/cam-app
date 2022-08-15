@@ -9,7 +9,8 @@ ion-icon {
 .header{
     display: flex;
     flex-direction: row;
-    align-items: flex-end;
+    align-items: center;
+    align-content: stretch;
 }
 
 img{

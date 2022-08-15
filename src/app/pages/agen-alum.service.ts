@@ -26,10 +26,6 @@ export class AgenAlumService {
     return this.http.get<respuestaDocentes>(`${Environments.API_ENDPOINT}/docentes.php`);
   }
 
-  verHora(){
-    return this.http.get<respuestaDis>(`${Environments.API_ENDPOINT}/hora.php`);
-  }
-
   verDetalles(data:any){
     const body = new HttpParams()
     .set('Area',data.Area)

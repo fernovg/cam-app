@@ -18,6 +18,7 @@ export class CardComponent implements OnInit {
   @Input() tipoUsuario;
 
   @Input() Num_Cita: string;
+  @Input() Matricula: string;
 
   procesado= false;
 
@@ -27,7 +28,7 @@ export class CardComponent implements OnInit {
               private modalCtrl: ModalController) { }
 
   ngOnInit() {
-    console.log(this.cita);
+    
   }
 
   async presentToast(message,color) {
@@ -66,16 +67,18 @@ export class CardComponent implements OnInit {
       console.log(Num_Cita);
       if(data.result)
         this.procesado=true;
+        this.presentToast(data.message,"primary")
       //this.cargarCitasD_P(); 
     })
   }
 
-  async openModal(Num_Cita) {
+  async openModal(Num_Cita,Matricula) {
     const modal = await this.modalCtrl.create({
       component: ModalComponent,
       //backdropDismiss: false,
       componentProps: {
         'Num_Cita': Num_Cita,
+        'Matricula': Matricula,
       },
     });
     //modal.present();

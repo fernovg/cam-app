@@ -1,0 +1,104 @@
+<app-header titulo="Mi Horario"></app-header>
+<ion-content>
+  <ion-progress-bar type="indeterminate" *ngIf="loading"></ion-progress-bar>
+
+  <ion-card *ngFor="let detalle of respuestaHorario?.detalle">
+    <ion-item>
+      <ion-icon name="calendar-clear" slot="start"></ion-icon>
+      <ion-label>Hora disponible</ion-label>
+      
+    </ion-item>
+  
+    <ion-card-content>
+      <ion-label>Duracion de la cita: {{detalle.Duracion}}</ion-label>
+      <br>
+      <ion-label>Empieza: {{detalle.Hora}}</ion-label>
+    </ion-card-content>
+    <ion-item>
+      <!-- <ion-button fill="outline" color="secondary" slot="end">Editar</ion-button> -->
+      <ion-button fill="outline" color="danger" slot="end" (click)="borrar(detalle.ID)" [disabled]="loading">Borrar</ion-button>
+    </ion-item>
+    
+  </ion-card>
+
+  <div class="ion-padding"
+    *ngIf="!loading && respuestaHorario?.detalle.length == 0 ">
+    <center>
+      <h3>No tiene horario</h3>
+    </center>    
+  </div>
+
+  
+
+
+  <ion-card [disabled]="loading">
+  
+    <ion-card-content>
+      <ion-button expand="block" shape="round" (click)="setOpenArea(true)" mode="ios">
+        <ion-icon slot="start" name="dice"></ion-icon> Agregar Area</ion-button>
+      <ion-button expand="block" shape="round" color="success"  (click)="setOpenHora(true)" mode="ios">
+        <ion-icon slot="start" name="calendar"></ion-icon> Agregar Hora</ion-button>
+    </ion-card-content>
+  </ion-card>
+  
+    
+    <ion-modal [isOpen]="modalArea" mode="ios">
+      <ng-template>
+        <ion-header>
+          <ion-toolbar>
+            <ion-title>Agrge su area de trabajo</ion-title>
+            <ion-buttons slot="start">
+              <ion-button (click)="setOpenArea(false)">Cerrar</ion-button>
+            </ion-buttons>
+          </ion-toolbar>
+        </ion-header>
+        <ion-progress-bar type="indeterminate" *ngIf="loading"></ion-progress-bar>
+        <ion-content class="ion-padding">
+          <ion-card mode="ios">
+            <ion-list>
+                <ion-item>
+                    <ion-icon name="dice"></ion-icon>
+                    <ion-select  placeholder="Seleciona el Area" [(ngModel)]="area.Area" [disabled]="loading">
+                        <ion-select-option value="{{areas.ID}}" name="Area"  *ngFor="let areas of respuestaAreas?.areas">{{areas.Area}}</ion-select-option>
+                    </ion-select>
+                </ion-item>
+            </ion-list>
+          </ion-card>
+          <ion-button color="success" expand="block" (click)="agArea()" [disabled]="loading">Agendar</ion-button>
+        </ion-content>
+      </ng-template>
+    </ion-modal>
+
+    
+    <ion-modal [isOpen]="modalHora" mode="ios">
+      <ng-template>
+        <ion-header>
+          <ion-toolbar>
+            <ion-title>Agregar Horario</ion-title>
+            <ion-buttons slot="start">
+              <ion-button (click)="setOpenHora(false)">Cerrar</ion-button>
+            </ion-buttons>
+          </ion-toolbar>
+        </ion-header>
+        <ion-progress-bar type="indeterminate" *ngIf="loading"></ion-progress-bar>
+        <ion-content class="ion-padding">
+          
+
+          <ion-card mode="ios">
+            <ion-label>Ingresar Hora de Inicio de la cita</ion-label>
+            <ion-datetime minuteValues="0,05,10,15,20,25,30,35,40,45,50,55" presentation="time" 
+            [(ngModel)]="tiempo.Ini" name="Fecha" hourCycle="h12" [disabled]="loading"></ion-datetime>
+
+            <ion-label>Ingrese Hora de Terminar la sesion</ion-label>
+            <ion-datetime mode="ios" minuteValues="0,05,10,15,20,25,30,35,40,45,50,55" presentation="time" 
+            [(ngModel)]="tiempo.Fin"   name="Fecha" hourCycle="h12" [disabled]="loading"></ion-datetime>
+            <ion-button color="success" expand="block" (click)="agHora()" [disabled]="loading">Agendar</ion-button>
+          </ion-card>
+
+            
+        </ion-content>
+      </ng-template>
+    </ion-modal>
+
+    
+</ion-content>

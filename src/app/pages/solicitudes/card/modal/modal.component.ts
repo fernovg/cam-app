@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ModalController, ToastController } from '@ionic/angular';
-import { respuestaDis} from "../../../../models/users.models";
+import {verHoraD} from "../../../../models/users.models";
 
 import { SolicitudesService } from '../../../solicitudes.service';
 
@@ -11,32 +11,43 @@ import { SolicitudesService } from '../../../solicitudes.service';
 })
 export class ModalComponent implements OnInit {
 
-  respuestaDis:respuestaDis;
+  verHoraD:verHoraD;
+
+  data = {
+    Matricula: ""
+  }
 
   @Input() Num_Cita: string;
+
+  @Input() Matricula: string;
 
   request = {
     Fecha: "",    
     Hora: "",
     Estado: "Pendiente",
     Cita: ""
-  }
+  }  
   
   constructor(private modalCtrl: ModalController, 
     private citas:SolicitudesService,
     private toastController: ToastController) { 
-      this.cargarHoras();
+      this.verHorario();
     }
 
   ngOnInit() {
     this.request.Cita = this.Num_Cita;
+    this.data.Matricula = this.Matricula;   
+    
+    console.log(this.data);
+    console.log(this.Matricula);
+    
   }
 
-  cargarHoras(){
-    this.citas.verHora().subscribe(data=>
-      {
-        this.respuestaDis=data;
-      })
+  verHorario(){
+    this.citas.verHorario(this.data).subscribe(data=>
+    {
+      this.verHoraD = data;
+    })
   }
 
   async presentToast(message) {

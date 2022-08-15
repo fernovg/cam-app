@@ -13,6 +13,15 @@ export class userReg{
     result?: boolean;
 }
 
+export class horarios{
+    message?: string;
+    result?: boolean;
+}
+
+export class agArea{
+    message?: string;
+    result?: boolean;
+}
 //mostrar las citas de los usuarios
 export interface respuestaCitas{
     citas: userCita[];
@@ -24,6 +33,7 @@ export interface userCita{
     Nombre?: string;
     Telefono?: string;
     Tutor?: string;
+    Docente?: string;
     Nombre_Area?: string;
     Aula?: string;
     Fecha_Cita?: string;
@@ -41,6 +51,7 @@ export interface userCitaD{
     Nombre?: string;
     Telefono?: string;
     Tutor?: string;
+    Docente?: string;
     Nombre_Area?: string;
     Aula?: string;
     Fecha_Cita?: string;
@@ -60,6 +71,16 @@ export interface encar_Area{
     Docente?: string;
 }
 
+export interface resDocA{
+    area: enArea[];
+}
+
+export interface enArea{
+    idArea?: string;
+    Nombre_Area?: string;
+    Aula?: string;
+}
+
 export interface respuestaHora{
     hora: horario[];
 }
@@ -67,6 +88,25 @@ export interface respuestaHora{
 export interface horario{
     Duracion?: string;
     HoraAten?: string;
+}
+
+export interface verHoraD{
+    hora: vhorario[];
+}
+
+export interface vhorario{
+    Duracion?: string;
+    HoraAten?: string;
+}
+
+export interface respuestaHorario{
+    hora: detalle[];
+}
+
+export interface detalle{
+    ID?: string;
+    Duracion?: string;
+    Hora?: string;
 }
 
 export interface respuestaAreas{
@@ -133,6 +173,12 @@ export class rechazarCita{
 //reagendar citas 
 
 export class reagenCita{
+    message?: string;
+    result?: boolean;
+}
+
+
+export class borrarHorario{
     message?: string;
     result?: boolean;
 }

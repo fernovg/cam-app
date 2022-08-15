@@ -41,10 +41,8 @@ export class RegistroPage implements OnInit {
   async fileSelected($event) {
     const selected = $event.target.files[0];
     var reader = new FileReader();
-    console.log(selected.size);
 
       if (selected.size < 1000000) {
-        console.log(selected.type);
         
         var ext = selected.type.split('/').pop();
         if (ext == "jpg" || ext == "jpeg") {

@@ -11,7 +11,7 @@ import { respuestaAreas, respuestaDocentes, respuestaDis,respuestaDocA, respuest
   styleUrls: ['./agen-alum.page.scss'],
   //menu
 })
-export class AgenAlumPage implements OnInit {
+export class AgenAlumPage implements OnInit { 
 
   respuestaDocA:respuestaDocA;
 
@@ -48,7 +48,6 @@ export class AgenAlumPage implements OnInit {
     private loadingCtrl: LoadingController) { 
       this.cargarAreas();
       this.cargarDocentes();
-      this.cargarHoras();
       this.verEncar();
       this.verHorario();
     }
@@ -76,13 +75,6 @@ export class AgenAlumPage implements OnInit {
         this.respuestaDocentes=data;       
       })
   }  
-
-  cargarHoras(){
-    this.listas.verHora().subscribe(data=>
-      {
-        this.respuestaDis=data;
-      })
-  }
 
   async vacioToast() {
     const toast = await this.toastController.create({

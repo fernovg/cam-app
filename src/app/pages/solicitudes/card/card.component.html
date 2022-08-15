@@ -33,6 +33,6 @@
 
   
   <ion-card-content class="btns" *ngIf="tipo == 'canceladas' && tipoUsuario == 'alumno'">
-    <ion-button fill="outline" color="warning" (click)="openModal(cita.Num_Cita)" slot="end" [disabled]="loading">Reagendar</ion-button>
+    <ion-button fill="outline" color="warning" (click)="openModal(cita.Num_Cita,cita.Matricula)" slot="end" [disabled]="loading">Reagendar</ion-button>
   </ion-card-content>
 </ion-card>

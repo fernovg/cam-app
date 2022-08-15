@@ -2,7 +2,7 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { map } from 'rxjs/operators';
 import { Environments } from 'src/environments/env.constant';
-import { respuestaCitas, respuestaCitasD, aprobarCita, rechazarCita, reagenCita, respuestaDis } from '../models/users.models';
+import { respuestaCitas, respuestaCitasD, aprobarCita, rechazarCita, reagenCita, verHoraD } from '../models/users.models';
 import { ManagerService } from '../services/manager.service';
 
 @Injectable({
@@ -12,9 +12,16 @@ export class SolicitudesService {
 
   constructor(private managerservice:ManagerService,
     private http: HttpClient) { }
-  
-    verHora(){
-      return this.http.get<respuestaDis>(`${Environments.API_ENDPOINT}/hora.php`);
+
+    verHorario(data:any){
+      const body = new HttpParams()
+      .set('Matricula',data.Matricula)
+      return this.http.post<any>(`${Environments.API_ENDPOINT}/reagendar/verHoras.php`,body).pipe(
+        map((verHoraD:verHoraD)=>{
+          console.log("Servicios",verHoraD);        
+          return verHoraD;
+        })
+      )
     }
 
     verCitasD_P(data:any){
@@ -69,7 +76,7 @@ export class SolicitudesService {
             .set('Hora',data.Hora)
             .set('Estado',data.Estado)
             .set('Cita',data.Cita)
-          return this.http.post<any>(`${Environments.API_ENDPOINT}/reagendar.php`, body).pipe(
+          return this.http.post<any>(`${Environments.API_ENDPOINT}/reagendar/reagendar.php`, body).pipe(
             map((reagenCita:reagenCita)=>{
               return reagenCita;
             })

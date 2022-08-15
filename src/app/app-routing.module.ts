@@ -40,6 +40,10 @@ const routes: Routes = [
     path: 'usuario',
     loadChildren: () => import('./pages/usuario/usuario.module').then( m => m.UsuarioPageModule),canActivate:[AuthGuard]
   },
+  {
+    path: 'modul-hora',
+    loadChildren: () => import('./pages/modul-hora/modul-hora.module').then( m => m.ModulHoraPageModule),canActivate:[AuthGuard]
+  },
 ];
 
 @NgModule({
