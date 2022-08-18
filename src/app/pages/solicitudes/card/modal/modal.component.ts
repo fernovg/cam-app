@@ -31,13 +31,13 @@ export class ModalComponent implements OnInit {
   constructor(private modalCtrl: ModalController, 
     private citas:SolicitudesService,
     private toastController: ToastController) { 
-      this.verHorario();
+      
     }
 
   ngOnInit() {
     this.request.Cita = this.Num_Cita;
     this.data.Matricula = this.Matricula;   
-    
+    this.verHorario();
     console.log(this.data);
     console.log(this.Matricula);
     

@@ -19,28 +19,34 @@
                 </ion-item>
             </ion-list>
             
-            <ion-list>
+            <ion-list [hidden]="validaArea">
                 <ion-item>
                     <ion-icon name="accessibility"></ion-icon>
-                    <ion-select placeholder="Seleciona Docente" [(ngModel)]="request.Docente" [(ngModel)]="encar.Matricula" (ionDismiss)="verHorario()" [disabled]="validaArea || loading">
+                    <ion-select placeholder="Seleciona Docente" [(ngModel)]="request.Docente" [(ngModel)]="encar.Matricula" (ionDismiss)="verHorario()" [disabled]="loading">
                         <ion-select-option value="{{encar.Matricula}}" name="Docente" select *ngFor="let encar of respuestaDocA?.encar" mode="ios">Docente: {{encar.Docente}}</ion-select-option>
+                        <ion-item *ngIf="!loading && (respuestaDocA?.encar.length == 0)">
+                            <ion-label>Esta area no cuenta con docentes</ion-label>
+                        </ion-item>
                     </ion-select>
                 </ion-item>
             </ion-list>
     
-            <ion-datetime mode="ios" [isDateEnabled]="isWeekday" presentation="date" name="Fecha" displayFormat="MM/DD/YYYY"
+            <ion-datetime [hidden]="validaDocen" mode="ios" [isDateEnabled]="isWeekday" presentation="date" name="Fecha" displayFormat="MM/DD/YYYY"
             min="{{fechavalida}}" [(ngModel)]="request.Fecha" [disabled]="validaArea || validaDocen || loading"></ion-datetime>
     
-            <ion-list>
+            <ion-list [hidden]="validaDocen">
                 <ion-item>
                     <ion-icon name="time"></ion-icon>
-                    <ion-select placeholder="Seleciona la Hora" [(ngModel)]="request.Hora" [disabled]="validaArea || validaDocen || loading">
+                    <ion-select placeholder="Seleciona la Hora" [(ngModel)]="request.Hora" [disabled]="loading" >
                         <ion-select-option value="{{hora.HoraAten}}" name="Hora"  *ngFor="let hora of respuestaHora?.hora" mode="ios">{{hora.Duracion}}</ion-select-option>
+                        <ion-item *ngIf="!loading && (respuestaHora?.hora.length == 0)">
+                            <ion-label>Este docente aun no cuenta con un horario</ion-label>
+                        </ion-item>
                     </ion-select>
                 </ion-item>
             </ion-list>
 
-            <ion-button color="success" expand="block" (click)="solicitad()" [disabled]="validaArea || validaDocen || loading">Solicitar</ion-button>
+            <ion-button color="success" expand="block" (click)="solicitad()" [disabled]="loading" [hidden]="ocultar">Solicitar</ion-button>
         </div>
     
     </ion-card>

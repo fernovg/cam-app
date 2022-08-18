@@ -11,48 +11,50 @@
     <ion-item>
       <ion-label position="floating">MATRICULA</ion-label>
       <ion-input type="number" name="Matricula" [(ngModel)]="request.Matricula" required maxlength="8" pattern="[0-9]{8}"></ion-input>
-      <small>{{request.Matricula.toString().length}}  / 8</small>
+      <!-- <small>{{request.Matricula.toString().length}}/8</small> -->
+      <small [hidden]="!validarMatricula">La matricula tiene que ser de 8 caracteres.  {{request.Matricula.toString().length}}/8 <ion-icon color="danger" name="alert-circle"></ion-icon></small>
     </ion-item>   
     
     <ion-item>
       <ion-label position="floating">NOMBRE</ion-label>
-      <ion-input type="text" name="Nombre" [(ngModel)]="request.Nombre"></ion-input>
+      <ion-input type="text" required name="Nombre" [(ngModel)]="request.Nombre"></ion-input>
     </ion-item>
     <ion-item>
       <ion-label position="floating">APELLIDO PATERNO</ion-label>
-      <ion-input type="text" name="APaterno" [(ngModel)]="request.APaterno" ></ion-input>
+      <ion-input type="text" required name="APaterno" [(ngModel)]="request.APaterno" ></ion-input>
     </ion-item>
     <ion-item>
       <ion-label position="floating">APELLIDO MATERNO</ion-label>
-      <ion-input type="text" name="AMaterno" [(ngModel)]="request.AMaterno" ></ion-input>
+      <ion-input type="text" required name="AMaterno" [(ngModel)]="request.AMaterno" ></ion-input>
     </ion-item>
     <ion-item>
       <ion-label position="floating">TELEFONO</ion-label>
-      <ion-input type="number" name="Telefono" placeholder="" [(ngModel)]="request.Telefono" required maxlength="10" pattern="[0-9]{10}"></ion-input>
-      <small>{{request.Telefono.toString().length}}  / 10</small>
+      <ion-input type="number" required name="Telefono" placeholder="" [(ngModel)]="request.Telefono" required maxlength="10" pattern="[0-9]{10}"></ion-input>
+      <small [hidden]="!validarTel">El telefono tiene que estar completo.  {{request.Telefono.toString().length}}/10 <ion-icon color="danger" name="alert-circle"></ion-icon></small>
     </ion-item>
     <ion-item>
       <ion-label position="floating">CORREO</ion-label>
-      <ion-input type="email" name="Correo" placeholder="" [(ngModel)]="request.Correo" required></ion-input>
+      <ion-input type="email" required name="Correo" placeholder="" [(ngModel)]="request.Correo" required></ion-input>
     </ion-item>
     <ion-item>
       <ion-label position="floating">NOMBRE DEL TUTOR</ion-label>
-      <ion-input type="text" name="Tutor" placeholder="" [(ngModel)]="request.Tutor" ></ion-input>
+      <ion-input type="text"  name="Tutor" placeholder="" [(ngModel)]="request.Tutor" ></ion-input>
     </ion-item>
     <ion-item>
       <ion-label position="floating">USUARIO</ion-label>
-      <ion-input type="text" name="Usuario" placeholder="" [(ngModel)]="request.Usuario" ></ion-input>
+      <ion-input type="text" required name="Usuario" placeholder="" [(ngModel)]="request.Usuario" ></ion-input>
     </ion-item>
     <ion-item>
       <ion-label position="floating">CONTRASEÑA</ion-label>
-      <ion-input type="password" name="Password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{5,}" [(ngModel)]="request.Password" ></ion-input>
-      <small>{{request.Password.toString().length}}</small>
+      <ion-input type="password" required name="Password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{5,}" [(ngModel)]="request.Password" ></ion-input>
+      <!-- <small>{{request.Password.toString().length}}</small> -->
+      <small [hidden]="validarCon">La contraseña requiere de un numero y una mayuscula <ion-icon color="danger" name="alert-circle"></ion-icon></small>
     </ion-item>
 
     <ion-item lines="none">
       <ion-button color="light" size="default" style="margin: auto;" (click)="addFile()">
         <ion-icon name="cloud-upload-outline"></ion-icon>
-          Seleccionar archivo          
+          Selecciona una foto          
       </ion-button>
       <input hidden type="file" #filepicker (change)="fileSelected($event)" accept="image/*"/>
     </ion-item>

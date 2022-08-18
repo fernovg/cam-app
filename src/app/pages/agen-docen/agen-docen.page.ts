@@ -61,16 +61,20 @@ export class AgenDocenPage implements OnInit {
     this.loading = true;
     this.listas.buscador(this.buscador).subscribe(data=>{
       this.loading = false;
+      
       this.respuestaAlumno=data;
+
+      this.alerbuscar("Busqueda Completada")
+      
     })    
   }
 
-  async vacioToast() {
+  async alerbuscar(message) {
     const toast = await this.toastController.create({
-      color: "warning",
+      color: "success",
       mode: "ios",
-      message: "Campio Vacio",
-      duration: 3000
+      message: message,
+      duration: 2000
     });
     toast.present();
   }
@@ -118,6 +122,7 @@ export class AgenDocenPage implements OnInit {
     this.listas.verHorario(this.horario).subscribe(data=>
     {
       this.loading = false;
+      
       this.respuestaHora = data;
     })
   }
@@ -126,19 +131,19 @@ export class AgenDocenPage implements OnInit {
     this.loading = true;
     if (this.request.Matricula == "") {      
       this.loading = false;
-      this.vacioToast();
+      this.presentToast("Seleccione un alumno");
       return;
     }if (this.request.Fecha == "") {      
       this.loading = false;
-      this.vacioToast();
+      this.presentToast("Coloque una fecha");
       return;
     }if (this.request.Area == "") {      
       this.loading = false;
-      this.vacioToast();
+      this.presentToast("Selecione su area");
       return;
     }if (this.request.Hora == "") {      
       this.loading = false;
-      this.vacioToast();
+      this.presentToast("Falta hora");
       return;
     }else{      
       this.citas.regCita(this.request).subscribe({
@@ -166,9 +171,18 @@ export class AgenDocenPage implements OnInit {
 
   get validaArea(){
 
-    if(this.request.Nombre == "")
-      return false;
+    if(this.request.Matricula == "")
+      return true;
 
-    return true;
+    return false;
   }
+
+  get ocultar(){
+
+    if(this.request.Hora == "")
+      return true;
+
+    return false;
+  }
+
 }

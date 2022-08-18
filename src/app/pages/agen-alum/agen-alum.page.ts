@@ -186,4 +186,12 @@ export class AgenAlumPage implements OnInit {
     return false;
   }
 
+  get ocultar(){
+
+    if(this.request.Hora == "")
+      return true;
+
+    return false;
+  }
+
 }

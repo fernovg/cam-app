@@ -34,6 +34,17 @@ export class LoginPage implements OnInit {
   logeo(){
     this.loading = true;
     console.log("Logear",this.request);
+
+    if (this.request.Usuario == "") {
+      this.loading = false;
+      this.presentToast("Escriba su usuario")
+      return
+    }
+    if (this.request.Password == "") {
+      this.loading = false;
+      this.presentToast("Escriba su contraseña")
+      return
+    }
     this.auth.authenticate(this.request).subscribe({
       next:(userInfo)=>{
         this.loading = false;

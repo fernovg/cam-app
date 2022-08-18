@@ -42,7 +42,7 @@ export class RegistroPage implements OnInit {
     const selected = $event.target.files[0];
     var reader = new FileReader();
 
-      if (selected.size < 1000000) {
+      if (selected.size < 2000000) {
         
         var ext = selected.type.split('/').pop();
         if (ext == "jpg" || ext == "jpeg") {
@@ -53,10 +53,10 @@ export class RegistroPage implements OnInit {
           
         }       
       }else{
-        this.presentToast("Tipo no adecuado");
+        this.presentToast("Formato de imagen no adecuado no adecuado");
       }
       }else{
-        this.presentToast("Limite de imagen tiene que ser 1mb");
+        this.presentToast("Limite de imagen tiene que ser 2 mb");
       }
       
   }
@@ -146,10 +146,38 @@ export class RegistroPage implements OnInit {
         },error: error=> {
           console.log(error);
         }
-      })
-      
+      })    
     
+  }
+
+  get validarMatricula(){
+
+    let lenghtMatricula = this.request.Matricula.toString().length;
     
+    if(lenghtMatricula < 8  ||  lenghtMatricula > 8)
+      return true;
+
+    return false;
+  }
+
+  get validarTel(){
+
+    let lenghtTel = this.request.Telefono.toString().length;
+    
+    if(lenghtTel < 10  ||  lenghtTel > 10)
+      return true;
+
+    return false;
+  }
+
+  get validarCon(){
+
+    let lenghtCon = this.request.Password.length;
+    
+    if(lenghtCon > 5)
+      return true;
+
+    return false;
   }
 
 }

@@ -1,6 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ToastController, ModalController } from '@ionic/angular';
-import { OverlayEventDetail } from '@ionic/core/components';
 
 import { ModalComponent } from '../../solicitudes/card/modal/modal.component';
 
@@ -11,6 +10,7 @@ import { SolicitudesService } from '../../solicitudes.service';
   templateUrl: './card.component.html',
   styleUrls: ['./card.component.scss'],
 })
+
 export class CardComponent implements OnInit {
 
   @Input() cita;
@@ -87,8 +87,20 @@ export class CardComponent implements OnInit {
         //this.procesado=true;
         console.log(data);
       }
+      
     });
     return await modal.present(); 
   }  
 
+  mensaje(Num_Cita){
+    this.citas.mensajes({
+      Num_Cita: Num_Cita
+    }).subscribe(data=>{
+      this.loading = false;
+      console.log(Num_Cita);
+      if(data.result)
+        this.procesado=true;
+      //this.cargarCitasD_P(); 
+    })
+  }
 }

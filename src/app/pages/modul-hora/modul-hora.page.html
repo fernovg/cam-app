@@ -5,8 +5,7 @@
   <ion-card *ngFor="let detalle of respuestaHorario?.detalle">
     <ion-item>
       <ion-icon name="calendar-clear" slot="start"></ion-icon>
-      <ion-label>Hora disponible</ion-label>
-      
+      <ion-label>Hora disponible</ion-label>      
     </ion-item>
   
     <ion-card-content>
@@ -64,7 +63,7 @@
                 </ion-item>
             </ion-list>
           </ion-card>
-          <ion-button color="success" expand="block" (click)="agArea()" [disabled]="loading">Agendar</ion-button>
+          <ion-button color="success" expand="block" (click)="agArea()" [disabled]="loading">Agregar</ion-button>
         </ion-content>
       </ng-template>
     </ion-modal>
@@ -85,14 +84,23 @@
           
 
           <ion-card mode="ios">
-            <ion-label>Ingresar Hora de Inicio de la cita</ion-label>
-            <ion-datetime minuteValues="0,05,10,15,20,25,30,35,40,45,50,55" presentation="time" 
-            [(ngModel)]="tiempo.Ini" name="Fecha" hourCycle="h12" [disabled]="loading"></ion-datetime>
+            <center>
+              <h3>Hora de Inicio</h3>
+            </center>            
+            <!-- <ion-datetime minuteValues="0,05,10,15,20,25,30,35,40,45,50,55" presentation="time" 
+            [(ngModel)]="tiempo.Ini" name="Fecha" hourCycle="h12" [disabled]="loading"></ion-datetime> -->
 
-            <ion-label>Ingrese Hora de Terminar la sesion</ion-label>
-            <ion-datetime mode="ios" minuteValues="0,05,10,15,20,25,30,35,40,45,50,55" presentation="time" 
-            [(ngModel)]="tiempo.Fin"   name="Fecha" hourCycle="h12" [disabled]="loading"></ion-datetime>
-            <ion-button color="success" expand="block" (click)="agHora()" [disabled]="loading">Agendar</ion-button>
+            <input class="hora" type="time" name="fecha" id="" [(ngModel)]="tiempo.Ini">
+
+            <center>
+              <h3>Hora de Terminar</h3>
+            </center>
+            <!-- <ion-datetime mode="ios" minuteValues="0,05,10,15,20,25,30,35,40,45,50,55" presentation="time" 
+            [(ngModel)]="tiempo.Fin"   name="Fecha" hourCycle="h12" [disabled]="loading"></ion-datetime> -->
+
+            <input class="hora" type="time" name="fecha" id="" [(ngModel)]="tiempo.Fin">
+
+            <ion-button color="success" [hidden]="validarHora" expand="block" (click)="agHora()" [disabled]="loading">Agendar</ion-button>
           </ion-card>
 
             
@@ -102,3 +110,13 @@
 
     
 </ion-content>
+
+<ion-footer>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button color="danger" (click)="cerrar()">
+        <ion-icon name="log-out"></ion-icon> Cerrar Sesion
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-footer>

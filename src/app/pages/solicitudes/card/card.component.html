@@ -27,7 +27,7 @@
     <ion-label>Hora: {{cita.Hora}}</ion-label>
   </ion-card-content>
   <ion-card-content class="btns" *ngIf="tipo == 'pendientes' && tipoUsuario == 'docente'">
-    <ion-button fill="outline" color="success" slot="end" (click)="aprobar(cita.Num_Cita)" [disabled]="loading">Aceptar</ion-button>
+    <ion-button fill="outline" color="success" slot="end" (click)="aprobar(cita.Num_Cita)" (click)="mensaje(cita.Num_Cita)" [disabled]="loading">Aceptar</ion-button>
     <ion-button fill="outline" color="danger" slot="end" (click)="rechazar(cita.Num_Cita)" [disabled]="loading">Cancelar</ion-button>
   </ion-card-content>
 

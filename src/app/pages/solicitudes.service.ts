@@ -70,6 +70,17 @@ export class SolicitudesService {
             )
         }
 
+        mensajes(data:any){
+          const body = new HttpParams()
+            .set('Num_Cita',data.Num_Cita)
+            return this.http.post<any>(`${Environments.API_ENDPOINT}/mensaje.php`, body).pipe(
+              map((rechazarCita:rechazarCita) => {
+                  console.log(rechazarCita);
+                  return rechazarCita;
+              })
+            )
+        }
+
         reagCita(data:any){
           const body = new HttpParams()
             .set('Fecha',data.Fecha)

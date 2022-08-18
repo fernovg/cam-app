@@ -20,7 +20,7 @@ export class ModulHoraPage implements OnInit {
 
   @Input() IdHora: string;
 
-  procesado= false;
+  procesado = false;
 
   // request para ver horarios
 
@@ -90,7 +90,7 @@ export class ModulHoraPage implements OnInit {
       this.loading = false;
       console.log("1 data "+data);
       if (data.result) {
-        // this.procesado = true;  
+        this.procesado = true;  
         this.llenoToast(data.message);
         this.navcontroller.navigateRoot("/usuario")
       }
@@ -112,6 +112,7 @@ export class ModulHoraPage implements OnInit {
   setOpenHora(isOpen: boolean) {
     this.loading = true;
     this.modalHora = isOpen;
+    this.procesado=true;
     this.loading = false;
   }
 
@@ -169,6 +170,7 @@ export class ModulHoraPage implements OnInit {
           if (!horarios.result) {
             this.presentToast(horarios.message);
             this.setOpenHora(false);
+            this.procesado=true;
             return;
           }
           // this.navcontroller.navigateRoot("/usuario");
@@ -181,6 +183,10 @@ export class ModulHoraPage implements OnInit {
         }
       })
     }
+
+    console.log(extIni);
+    
+    console.log(this.data);
     
   }
 
@@ -210,5 +216,19 @@ export class ModulHoraPage implements OnInit {
     }
   }
 
+
+  get validarHora(){
+    
+    if(this.tiempo.Ini == "" && this.tiempo.Fin == "")
+      return true;
+
+    return false;
+  }
+
+
+  cerrar() {
+    this.auth.logout();
+    this.navcontroller.navigateRoot("/inicio")
+  }
 
 }

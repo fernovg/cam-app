@@ -3,7 +3,7 @@
 <ion-content>
   <ion-progress-bar type="indeterminate" *ngIf="loading"></ion-progress-bar>
     
-  <ion-card mode="ios">       
+    <ion-card mode="ios">       
 
     <img src="../../../assets/cam.png" alt="">
 
@@ -11,40 +11,49 @@
 
     <div class="form">
         <div class="buscador">
-            <ion-searchbar [(ngModel)]="buscador.Nombre" placeholder="Buscar"></ion-searchbar>
+            <ion-searchbar  [(ngModel)]="buscador.Nombre" placeholder="Nombre Alumno"></ion-searchbar>
             <ion-button color="success" size="small" (click)="buscar()" [disabled]="loading">Buscar</ion-button>
         </div>
         <ion-list>
             <ion-item>
                 <ion-icon name="accessibility"></ion-icon>
                 <ion-select placeholder="Seleciona un alumno" [(ngModel)]="request.Matricula" [disabled]="loading">
-                    <ion-select-option value="{{listAlumnos.Matricula}}" name="Matricula"  *ngFor="let listAlumnos of respuestaAlumno?.listAlumnos" mode="ios">Alumno: {{listAlumnos.Nombre}}</ion-select-option>
+                    <ion-select-option value="{{listAlumnos.Matricula}}" selected name="Matricula"  *ngFor="let listAlumnos of respuestaAlumno?.listAlumnos" mode="ios">{{listAlumnos.Nombre}} {{listAlumnos.Matricula}}</ion-select-option>
+                    <ion-item *ngIf="!loading && (respuestaAlumno?.listAlumnos.length == 0)">
+                        <ion-label>No se encontro ningun alumno</ion-label>
+                    </ion-item>
                 </ion-select>
             </ion-item>
         </ion-list>
 
-        <ion-datetime mode="ios" [isDateEnabled]="isWeekday" presentation="date" name="Fecha" [(ngModel)]="request.Fecha" [disabled]="loading"
+        <ion-datetime mode="ios" [isDateEnabled]="isWeekday" presentation="date" name="Fecha" [(ngModel)]="request.Fecha" [disabled]="loading" [hidden]="validaArea"
         min="{{fechavalida}}"></ion-datetime>
 
-        <ion-list>
+        <ion-list [hidden]="validaArea">
             <ion-item>
                 <ion-icon name="dice"></ion-icon>
                 <ion-select placeholder="Seleciona el Area" [(ngModel)]="request.Area" [disabled]="loading">
                     <ion-select-option value="{{area.idArea}}" name="Area"  *ngFor="let area of resDocA?.area" mode="ios">{{area.Area}}</ion-select-option>
+                    <ion-item *ngIf="!loading && (resDocA?.area.length == 0)">
+                        <ion-label>Aun no cuentas con una area de trabajo</ion-label>
+                    </ion-item>
                 </ion-select>
             </ion-item>
         </ion-list>
 
-        <ion-list>
+        <ion-list [hidden]="validaArea">
             <ion-item>
                 <ion-icon name="time"></ion-icon>
                 <ion-select placeholder="Seleciona la Hora" [(ngModel)]="request.Hora" [disabled]="loading">
                     <ion-select-option value="{{hora.HoraAten}}" name="Hora"  *ngFor="let hora of respuestaHora?.hora" mode="ios">{{hora.Duracion}}</ion-select-option>
+                    <ion-item *ngIf="!loading && (respuestaHora?.hora.length == 0)">
+                        <ion-label>Aun no cuentas con un horario</ion-label>
+                    </ion-item>
                 </ion-select>
             </ion-item>
         </ion-list>
 
-        <ion-button color="success" expand="block" (click)="registrar()" [disabled]="loading">Agendar</ion-button>
+        <ion-button color="success" expand="block" (click)="registrar()" [disabled]="loading" [hidden]="ocultar">Agendar</ion-button>
     </div>
 
 </ion-card>
